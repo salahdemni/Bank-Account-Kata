@@ -2,6 +2,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankAccountKataTest {
 
@@ -11,11 +13,13 @@ public class BankAccountKataTest {
      */
     @Test
     public void testDepositToAccount() {
-        Account account = null;
+        List<Operation> operations = new ArrayList<>();
+        Account account = new PersonalAccount(operations);
         //Add some money to the PersonalAccount
         BigDecimal deposit = new BigDecimal(200);
         account.depositToAccount(deposit);
         Assert.assertEquals(account.getBalance(), BigDecimal.valueOf(200));
+        Assert.assertEquals(operations.get(0).getAmount(), BigDecimal.valueOf(200));
     }
 
     /*
