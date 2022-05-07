@@ -1,3 +1,4 @@
+import exceptions.InsufficientAmountException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,7 +27,7 @@ public class BankAccountKataTest {
      Test Withdrawal from an PersonalAccount (retrieve some money)
       */
     @Test
-    public void testWithDrawFromAccount() {
+    public void testWithDrawFromAccount() throws Exception {
         List<Operation> operations = new ArrayList<>();
         Account account = new PersonalAccount(operations);
         //Add some money to the PersonalAccount
@@ -41,7 +42,7 @@ public class BankAccountKataTest {
     }
 
     @Test
-    public void testWithDrawAllTheAmount() {
+    public void testWithDrawAllTheAmount() throws Exception {
         List<Operation> operations = new ArrayList<>();
         Account account = new PersonalAccount(operations);
         //Add some money to the PersonalAccount
@@ -57,11 +58,12 @@ public class BankAccountKataTest {
     }
 
     /*
-    Test Withdrawal beyond the Amount in the PersonalAccount
-     */
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testWithDrawBeyondAccountBalance() {
-        Account account = null;
+   Test Withdrawal beyond the Amount in the PersonalAccount
+    */
+    @Test(expectedExceptions = InsufficientAmountException.class)
+    public void testWithDrawBeyondAccountBalance() throws Exception {
+        List<Operation> operations = new ArrayList<>();
+        Account account = new PersonalAccount(operations);
         //Add some money to the PersonalAccount
         BigDecimal deposit = new BigDecimal(100);
         account.depositToAccount(deposit);
@@ -69,5 +71,6 @@ public class BankAccountKataTest {
         BigDecimal withDraw = new BigDecimal(120);
         account.withDrawFromAccount(withDraw);
     }
+
 
 }

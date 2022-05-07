@@ -6,7 +6,7 @@ public interface Account {
 
     void depositToAccount(BigDecimal amount);
 
-    void withDrawFromAccount(BigDecimal amount);
+    void withDrawFromAccount(BigDecimal amount) throws Exception;
 
     void displayHistory();
 }

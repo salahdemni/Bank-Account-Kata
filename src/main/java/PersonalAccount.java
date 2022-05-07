@@ -1,3 +1,5 @@
+import exceptions.InsufficientAmountException;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +35,7 @@ public class PersonalAccount implements Account {
 
     }
 
-    public void withDrawFromAccount(BigDecimal amount) {
+    public void withDrawFromAccount(BigDecimal amount) throws Exception {
         if (amount.compareTo(BigDecimal.ZERO) >= 0) {
             if (balance.compareTo(amount) >= 0) {
                 balance = balance.subtract(amount);
@@ -42,7 +44,7 @@ public class PersonalAccount implements Account {
                 withdrawal.setDate(new Date());
                 this.operations.add(withdrawal);
             } else {
-                throw new IllegalArgumentException("You have not enough balance in the Account!");
+                    throw new InsufficientAmountException("You have not enough balance in the Account!");
             }
         } else System.out.println("Nothing to withdraw as the Amount is not a valid value");
 
