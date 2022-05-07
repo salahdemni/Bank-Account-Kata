@@ -35,7 +35,11 @@ public class PersonalAccount implements Account {
 
     }
 
-    public void withDrawFromAccount(BigDecimal amount) throws Exception {
+    /*
+    synchronized block added to prevent issues in case of a multithreading
+     or multiple client use the same account
+     */
+    synchronized public void withDrawFromAccount(BigDecimal amount) throws Exception {
         if (amount.compareTo(BigDecimal.ZERO) >= 0) {
             if (balance.compareTo(amount) >= 0) {
                 balance = balance.subtract(amount);
