@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.*;
+
 public class BankAccountKataTest {
 
 
@@ -71,6 +73,21 @@ public class BankAccountKataTest {
         BigDecimal withDraw = new BigDecimal(120);
         account.withDrawFromAccount(withDraw);
     }
+/*
+    Test Display History of the operation performed in the Personal Account
+     */
 
+    @Test
+    public void testDisplayHistory() throws Exception {
+        Account account = mock(PersonalAccount.class);
+        //Add some money to the PersonalAccount
+        BigDecimal deposit = new BigDecimal(100);
+        account.depositToAccount(deposit);
+        //withdraw some money
+        BigDecimal withDraw = new BigDecimal(100);
+        account.withDrawFromAccount(withDraw);
+        account.displayHistory();
+        verify(account, times(1)).displayHistory();
+    }
 
 }

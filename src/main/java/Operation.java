@@ -23,4 +23,13 @@ public class Operation {
         this.amount = amount;
     }
 
+
+    @Override
+    public String toString() {
+        if (getAmount().compareTo(BigDecimal.ZERO) < 0) {
+            return (new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(getDate()) + ": Withdraw Amount of " + getAmount());
+        }
+        return (new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(getDate()) + ": Deposit Amount of " + getAmount());
+
+    }
 }

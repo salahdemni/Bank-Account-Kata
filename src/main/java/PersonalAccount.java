@@ -54,9 +54,13 @@ public class PersonalAccount implements Account {
 
     }
 
-    @Override
     public void displayHistory() {
-
+        //Display operations history
+        System.out.println("Bellow is the History of the Account :" + getAccountId());
+        for (Operation operation : this.operations) {
+            System.out.println(operation);
+        }
+        System.out.println("The Actual Account Balance is :" + getBalance());
     }
 
     public BigDecimal getBalance() {
