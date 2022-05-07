@@ -33,8 +33,18 @@ public class PersonalAccount implements Account {
 
     }
 
-    @Override
     public void withDrawFromAccount(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) >= 0) {
+            if (balance.compareTo(amount) >= 0) {
+                balance = balance.subtract(amount);
+                Operation withdrawal = new Operation();
+                withdrawal.setAmount(amount.negate());
+                withdrawal.setDate(new Date());
+                this.operations.add(withdrawal);
+            } else {
+                throw new IllegalArgumentException("You have not enough balance in the Account!");
+            }
+        } else System.out.println("Nothing to withdraw as the Amount is not a valid value");
 
     }
 
